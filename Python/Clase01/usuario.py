@@ -2,6 +2,8 @@
 Clase Usuario - Modelo de datos para un usuario
 """
 
+from logger_base import LoggerBase
+
 
 class Usuario:
     """
@@ -49,35 +51,47 @@ class Usuario:
 
 # PRUEBAS
 if __name__ == "__main__":
+    LoggerBase.configurar_logger()
     print("\n=== PRUEBAS DE LA CLASE USUARIO ===\n")
 
     # Prueba 1: Crear usuario vacío
     print("[PRUEBA 1] Creando usuario vacío...")
     usuario1 = Usuario()
-    print(f"OK - Usuario creado: {usuario1}\n")
+    print(f"OK - Usuario creado: {usuario1}")
+    LoggerBase.info("Usuario vacio creado")
+    print()
 
     # Prueba 2: Crear usuario con parámetros
     print("[PRUEBA 2] Creando usuario con parámetros...")
     usuario2 = Usuario(1, "admin", "123456")
-    print(f"OK - Usuario creado: {usuario2}\n")
+    print(f"OK - Usuario creado: {usuario2}")
+    LoggerBase.info("Usuario con parametros creado")
+    print()
 
     # Prueba 3: Usar getters
     print("[PRUEBA 3] Obteniendo datos con getters...")
     print(f"ID: {usuario2.get_id_usuario()}")
     print(f"Nombre: {usuario2.get_usuario_nombre()}")
-    print(f"Password: {usuario2.get_password()}\n")
+    print(f"Password: {usuario2.get_password()}")
+    LoggerBase.info("Getters utilizados correctamente")
+    print()
 
     # Prueba 4: Usar setters
     print("[PRUEBA 4] Modificando datos con setters...")
     usuario1.set_id_usuario(2)
     usuario1.set_usuario_nombre("mago_de_oz")
     usuario1.set_password("contraseña123")
-    print(f"OK - Usuario modificado: {usuario1}\n")
+    print(f"OK - Usuario modificado: {usuario1}")
+    LoggerBase.info("Setters utilizados correctamente")
+    print()
 
     # Prueba 5: Verificar cambios
     print("[PRUEBA 5] Verificando que los cambios se guardaron...")
     print(f"ID: {usuario1.get_id_usuario()}")
     print(f"Nombre: {usuario1.get_usuario_nombre()}")
-    print(f"Password: {usuario1.get_password()}\n")
+    print(f"Password: {usuario1.get_password()}")
+    LoggerBase.info("Cambios verificados correctamente")
+    print()
 
     print("=== TODAS LAS PRUEBAS COMPLETADAS ===\n")
+    LoggerBase.info("Pruebas de Usuario completadas")

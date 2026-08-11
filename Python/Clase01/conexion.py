@@ -5,11 +5,7 @@ Maneja el pool de conexiones y la obtención de cursores
 
 import psycopg2
 from psycopg2 import pool
-import logging
-
-# Configuración de logging (usar logger_base después)
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from logger_base import LoggerBase
 
 
 class Conexion:
@@ -34,18 +30,18 @@ class Conexion:
         if cls._pool is None:
             try:
                 cls._pool = pool.SimpleConnectionPool(
-    cls._MIN_CON,
-    cls._MAX_CON,
-    host=cls._HOST,
-    database=cls._DATABASE,
-    user=cls._USERNAME,
-    password=cls._PASSWORD,
-    port=cls._DB_PORT,
-    client_encoding='UTF8'
-)
-                logger.info("Pool de conexiones creado")
+                    cls._MIN_CON,
+                    cls._MAX_CON,
+                    host=cls._HOST,
+                    database=cls._DATABASE,
+                    user=cls._USERNAME,
+                    password=cls._PASSWORD,
+                    port=cls._DB_PORT,
+                    client_encoding='UTF8'
+                )
+                LoggerBase.info("Pool de conexiones creado")
             except (Exception, psycopg2.DatabaseError) as error:
-                logger.error(f"Error al crear el pool: {error}")
+                LoggerBase.error(f"Error al crear el pool: {error}")
                 raise
         return cls._pool
 
@@ -54,10 +50,10 @@ class Conexion:
         # Trae una conexión disponible del pool
         try:
             conexion_bd = cls.obtener_pool().getconn()
-            logger.info("Conexión obtenida del pool")
+            LoggerBase.info("Conexión obtenida del pool")
             return CursorDelPool(conexion_bd, cls.obtener_pool())
         except (Exception, psycopg2.DatabaseError) as error:
-            logger.error(f"Error al obtener conexión: {error}")
+            LoggerBase.error(f"Error al obtener conexión: {error}")
             raise
 
     @classmethod
@@ -66,9 +62,9 @@ class Conexion:
         if conexion_bd:
             try:
                 pool_conexiones.putconn(conexion_bd)
-                logger.info("Conexión liberada al pool")
+                LoggerBase.info("Conexión liberada al pool")
             except (Exception, psycopg2.DatabaseError) as error:
-                logger.error(f"Error al liberar conexión: {error}")
+                LoggerBase.error(f"Error al liberar conexión: {error}")
 
     @classmethod
     def cerrar_conexiones(cls):
@@ -77,9 +73,9 @@ class Conexion:
             try:
                 cls._pool.closeall()
                 cls._pool = None
-                logger.info("Todas las conexiones cerradas")
+                LoggerBase.info("Todas las conexiones cerradas")
             except (Exception, psycopg2.DatabaseError) as error:
-                logger.error(f"Error al cerrar el pool: {error}")
+                LoggerBase.error(f"Error al cerrar el pool: {error}")
 
 
 class CursorDelPool:
@@ -111,11 +107,11 @@ class CursorDelPool:
             else:
                 self._cursor.execute(consulta)
             self._conexion.commit()
-            logger.info(f"Consulta ejecutada. Filas afectadas: {self._cursor.rowcount}")
+            LoggerBase.info(f"Consulta ejecutada. Filas afectadas: {self._cursor.rowcount}")
             return self._cursor.rowcount
         except (Exception, psycopg2.DatabaseError) as error:
             self._conexion.rollback()
-            logger.error(f"Error al ejecutar consulta: {error}")
+            LoggerBase.error(f"Error al ejecutar consulta: {error}")
             raise
 
     def obtener_resultado(self):
@@ -124,7 +120,7 @@ class CursorDelPool:
             resultado = self._cursor.fetchone()
             return resultado
         except (Exception, psycopg2.DatabaseError) as error:
-            logger.error(f"Error al obtener resultado: {error}")
+            LoggerBase.error(f"Error al obtener resultado: {error}")
             raise
 
     def obtener_todos_resultados(self):
@@ -133,12 +129,13 @@ class CursorDelPool:
             resultados = self._cursor.fetchall()
             return resultados
         except (Exception, psycopg2.DatabaseError) as error:
-            logger.error(f"Error al obtener resultados: {error}")
+            LoggerBase.error(f"Error al obtener resultados: {error}")
             raise
 
 
 # PRUEBAS
 if __name__ == "__main__":
+    LoggerBase.configurar_logger()
     print("\n=== PRUEBAS DE CONEXION A POSTGRESQL ===\n")
 
     try:
@@ -155,7 +152,7 @@ if __name__ == "__main__":
         print()
 
         print("[PRUEBA 3] Trayendo usuario con ID = 1...")
-        cursor_pool.ejecutar("SELECT * FROM usuarios WHERE id= %s", (1,))
+        cursor_pool.ejecutar("SELECT * FROM usuarios WHERE id = %s", (1,))
         usuario_uno = cursor_pool.obtener_resultado()
         if usuario_uno:
             print(f"OK - Usuario encontrado: {usuario_uno}\n")
