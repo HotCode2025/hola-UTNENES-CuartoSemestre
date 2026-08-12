@@ -2,3 +2,20 @@
 2026-08-11 18:58:43 - AplicacionUsuarios - ERROR - Este es un mensaje de error
 2026-08-11 18:58:43 - AplicacionUsuarios - WARNING - Este es un mensaje de advertencia
 2026-08-11 18:58:43 - AplicacionUsuarios - DEBUG - Este es un mensaje de debug
+2026-08-12 19:50:51 - AplicacionUsuarios - INFO - Aplicacion iniciada
+2026-08-12 19:50:53 - AplicacionUsuarios - INFO - Pool de conexiones creado
+2026-08-12 19:50:53 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:50:53 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:50:53 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 19:50:53 - AplicacionUsuarios - ERROR - Error al obtener usuarios: type object 'Conexion' has no attribute 'liberar_conexion'
+2026-08-12 19:50:53 - AplicacionUsuarios - WARNING - Intento de listar usuarios - lista vacia
+2026-08-12 19:51:03 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:51:03 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:51:03 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 19:51:03 - AplicacionUsuarios - INFO - Usuario 'Otar' creado
+2026-08-12 19:51:03 - AplicacionUsuarios - ERROR - Error al crear usuario: type object 'Conexion' has no attribute 'liberar_conexion'
+2026-08-12 19:51:04 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:51:04 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:51:04 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 2
+2026-08-12 19:51:04 - AplicacionUsuarios - ERROR - Error al obtener usuarios: type object 'Conexion' has no attribute 'liberar_conexion'
+2026-08-12 19:51:04 - AplicacionUsuarios - WARNING - Intento de listar usuarios - lista vacia

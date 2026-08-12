@@ -24,7 +24,6 @@ class UsuarioDAO:
             cursor_pool.ejecutar(consulta, parametros)
             LoggerBase.info(f"Usuario '{usuario.get_usuario_nombre()}' creado")
             cursor_pool._cursor.close()
-            Conexion.liberar_conexion(cursor_pool._conexion, cursor_pool._pool)
             return True
         except Exception as error:
             LoggerBase.error(f"Error al crear usuario: {error}")
@@ -40,7 +39,6 @@ class UsuarioDAO:
             cursor_pool.ejecutar(consulta, parametros)
             resultado = cursor_pool.obtener_resultado()
             cursor_pool._cursor.close()
-            Conexion.liberar_conexion(cursor_pool._conexion, cursor_pool._pool)
             
             if resultado:
                 usuario = Usuario(resultado[0], resultado[1], resultado[2])
@@ -62,7 +60,6 @@ class UsuarioDAO:
             cursor_pool.ejecutar(consulta)
             resultados = cursor_pool.obtener_todos_resultados()
             cursor_pool._cursor.close()
-            Conexion.liberar_conexion(cursor_pool._conexion, cursor_pool._pool)
             
             usuarios = []
             for resultado in resultados:
@@ -84,7 +81,6 @@ class UsuarioDAO:
             cursor_pool.ejecutar(consulta, parametros)
             LoggerBase.info(f"Usuario con ID {usuario.get_id_usuario()} actualizado")
             cursor_pool._cursor.close()
-            Conexion.liberar_conexion(cursor_pool._conexion, cursor_pool._pool)
             return True
         except Exception as error:
             LoggerBase.error(f"Error al actualizar usuario: {error}")
@@ -100,7 +96,6 @@ class UsuarioDAO:
             cursor_pool.ejecutar(consulta, parametros)
             LoggerBase.info(f"Usuario con ID {id_usuario} eliminado")
             cursor_pool._cursor.close()
-            Conexion.liberar_conexion(cursor_pool._conexion, cursor_pool._pool)
             return True
         except Exception as error:
             LoggerBase.error(f"Error al eliminar usuario: {error}")
@@ -147,4 +142,5 @@ if __name__ == "__main__":
     print("=== TODAS LAS PRUEBAS COMPLETADAS ===\n")
 
     # Cerrar todas las conexiones
-    Conexion.cerrar_conexiones()
+    from pool import Pool
+    Pool.cerrar_pool()

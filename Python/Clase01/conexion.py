@@ -1,81 +1,37 @@
 """
 Módulo de Conexión a Base de Datos PostgreSQL
-Maneja el pool de conexiones y la obtención de cursores
+Maneja la obtención de cursores usando el pool
 """
 
 import psycopg2
-from psycopg2 import pool
+from pool import Pool
 from logger_base import LoggerBase
 
 
 class Conexion:
     """
-    Gestiona la conexión a PostgreSQL y el pool de conexiones.
-    Se encarga de reutilizar conexiones en lugar de crear nuevas cada vez.
+    Gestiona la conexión a PostgreSQL usando el pool.
+    Se encarga de obtener cursores y ejecutar consultas.
     """
-
-    # Configuración de la base de datos
-    _DATABASE = "laboratorio_usuarios"
-    _USERNAME = "postgres"
-    _PASSWORD = "admin"
-    _DB_PORT = "5432"
-    _HOST = "localhost"
-    _MIN_CON = 2  # Mínimo de conexiones activas
-    _MAX_CON = 5  # Máximo de conexiones
-    _pool = None
-
-    @classmethod
-    def obtener_pool(cls):
-        # Crea el pool si no existe
-        if cls._pool is None:
-            try:
-                cls._pool = pool.SimpleConnectionPool(
-                    cls._MIN_CON,
-                    cls._MAX_CON,
-                    host=cls._HOST,
-                    database=cls._DATABASE,
-                    user=cls._USERNAME,
-                    password=cls._PASSWORD,
-                    port=cls._DB_PORT,
-                    client_encoding='UTF8'
-                )
-                LoggerBase.info("Pool de conexiones creado")
-            except (Exception, psycopg2.DatabaseError) as error:
-                LoggerBase.error(f"Error al crear el pool: {error}")
-                raise
-        return cls._pool
 
     @classmethod
     def obtener_conexion(cls):
         # Trae una conexión disponible del pool
         try:
-            conexion_bd = cls.obtener_pool().getconn()
+            conexion_bd = Pool.obtener_conexion()
             LoggerBase.info("Conexión obtenida del pool")
-            return CursorDelPool(conexion_bd, cls.obtener_pool())
+            return CursorDelPool(conexion_bd)
         except (Exception, psycopg2.DatabaseError) as error:
             LoggerBase.error(f"Error al obtener conexión: {error}")
             raise
 
     @classmethod
-    def liberar_conexion(cls, conexion_bd, pool_conexiones):
-        # Devuelve la conexión al pool para que otro la use
-        if conexion_bd:
-            try:
-                pool_conexiones.putconn(conexion_bd)
-                LoggerBase.info("Conexión liberada al pool")
-            except (Exception, psycopg2.DatabaseError) as error:
-                LoggerBase.error(f"Error al liberar conexión: {error}")
-
-    @classmethod
     def cerrar_conexiones(cls):
-        # Cierra todas las conexiones del pool (cuando termina la app)
-        if cls._pool:
-            try:
-                cls._pool.closeall()
-                cls._pool = None
-                LoggerBase.info("Todas las conexiones cerradas")
-            except (Exception, psycopg2.DatabaseError) as error:
-                LoggerBase.error(f"Error al cerrar el pool: {error}")
+        # Cierra el pool (cuando termina la app)
+        try:
+            Pool.cerrar_pool()
+        except (Exception, psycopg2.DatabaseError) as error:
+            LoggerBase.error(f"Error al cerrar conexiones: {error}")
 
 
 class CursorDelPool:
@@ -84,10 +40,9 @@ class CursorDelPool:
     Administra la conexión y el cursor obtenidos del pool.
     """
 
-    def __init__(self, conexion_bd, pool_conexiones):
-        # Guarda la conexión y el pool, crea el cursor
+    def __init__(self, conexion_bd):
+        # Guarda la conexión y crea el cursor
         self._conexion = conexion_bd
-        self._pool = pool_conexiones
         self._cursor = self._conexion.cursor()
 
     def __enter__(self):
@@ -97,7 +52,7 @@ class CursorDelPool:
     def __exit__(self, exc_type, exc_val, exc_tb):
         # Se ejecuta al salir del with, cierra cursor y libera conexión
         self._cursor.close()
-        Conexion.liberar_conexion(self._conexion, self._pool)
+        Pool.liberar_conexion(self._conexion)
 
     def ejecutar(self, consulta, parametros=None):
         # Ejecuta una consulta SQL
@@ -166,7 +121,7 @@ if __name__ == "__main__":
 
         print("[PRUEBA 5] Liberando conexion...")
         cursor_pool._cursor.close()
-        Conexion.liberar_conexion(cursor_pool._conexion, cursor_pool._pool)
+        Pool.liberar_conexion(cursor_pool._conexion)
         print("OK - Conexion liberada\n")
 
         print("[PRUEBA 6] Obteniendo segunda conexion...")
@@ -176,7 +131,7 @@ if __name__ == "__main__":
         print(f"OK - Segunda conexion funciona. Total: {total2[0]}\n")
 
         cursor_pool2._cursor.close()
-        Conexion.liberar_conexion(cursor_pool2._conexion, cursor_pool2._pool)
+        Pool.liberar_conexion(cursor_pool2._conexion)
 
         print("[PRUEBA 7] Cerrando todas las conexiones...")
         Conexion.cerrar_conexiones()
