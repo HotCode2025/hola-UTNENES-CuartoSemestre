@@ -144,3 +144,4 @@ if __name__ == "__main__":
     # Cerrar todas las conexiones
     from pool import Pool
     Pool.cerrar_pool()
+    

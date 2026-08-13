@@ -19,3 +19,86 @@
 2026-08-12 19:51:04 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 2
 2026-08-12 19:51:04 - AplicacionUsuarios - ERROR - Error al obtener usuarios: type object 'Conexion' has no attribute 'liberar_conexion'
 2026-08-12 19:51:04 - AplicacionUsuarios - WARNING - Intento de listar usuarios - lista vacia
+2026-08-12 19:52:12 - AplicacionUsuarios - INFO - Aplicacion iniciada
+2026-08-12 19:52:13 - AplicacionUsuarios - INFO - Pool de conexiones creado
+2026-08-12 19:52:13 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:52:13 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:52:13 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 2
+2026-08-12 19:52:13 - AplicacionUsuarios - INFO - Se obtuvieron 2 usuarios
+2026-08-12 19:52:13 - AplicacionUsuarios - INFO - Listado de usuarios mostrado
+2026-08-12 19:52:54 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:52:54 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:52:54 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 19:52:54 - AplicacionUsuarios - DEBUG - Usuario con ID 10 obtenido
+2026-08-12 19:53:02 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:53:02 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:53:02 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 19:53:02 - AplicacionUsuarios - INFO - Usuario con ID 10 actualizado
+2026-08-12 19:53:04 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:53:04 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 19:53:04 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 2
+2026-08-12 19:53:04 - AplicacionUsuarios - INFO - Se obtuvieron 2 usuarios
+2026-08-12 19:53:04 - AplicacionUsuarios - INFO - Listado de usuarios mostrado
+2026-08-12 21:04:52 - AplicacionUsuarios - INFO - Aplicacion iniciada
+2026-08-12 21:27:50 - AplicacionUsuarios - INFO - Aplicacion iniciada
+2026-08-12 21:28:05 - AplicacionUsuarios - INFO - Pool de conexiones creado
+2026-08-12 21:28:05 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:05 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:05 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 2
+2026-08-12 21:28:05 - AplicacionUsuarios - INFO - Se obtuvieron 2 usuarios
+2026-08-12 21:28:05 - AplicacionUsuarios - INFO - Listado de usuarios mostrado
+2026-08-12 21:28:20 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:20 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:20 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 21:28:20 - AplicacionUsuarios - INFO - Usuario 'Ariel' creado
+2026-08-12 21:28:26 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:26 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:26 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 3
+2026-08-12 21:28:26 - AplicacionUsuarios - INFO - Se obtuvieron 3 usuarios
+2026-08-12 21:28:26 - AplicacionUsuarios - INFO - Listado de usuarios mostrado
+2026-08-12 21:28:37 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:37 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:37 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 21:28:37 - AplicacionUsuarios - DEBUG - Usuario con ID 11 obtenido
+2026-08-12 21:28:43 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:43 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:28:43 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 21:28:43 - AplicacionUsuarios - INFO - Usuario con ID 11 actualizado
+2026-08-12 21:28:44 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:28:44 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:28:44 - AplicacionUsuarios - ERROR - Error al obtener usuarios: connection pool exhausted
+2026-08-12 21:28:44 - AplicacionUsuarios - WARNING - Intento de listar usuarios - lista vacia
+2026-08-12 21:28:58 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:28:58 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:28:58 - AplicacionUsuarios - ERROR - Error al obtener usuarios: connection pool exhausted
+2026-08-12 21:28:58 - AplicacionUsuarios - WARNING - Intento de listar usuarios - lista vacia
+2026-08-12 21:29:01 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:29:01 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:29:01 - AplicacionUsuarios - ERROR - Error al obtener usuarios: connection pool exhausted
+2026-08-12 21:29:01 - AplicacionUsuarios - WARNING - Intento de listar usuarios - lista vacia
+2026-08-12 21:30:25 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:30:25 - AplicacionUsuarios - ERROR - Error al obtener conexión: connection pool exhausted
+2026-08-12 21:30:25 - AplicacionUsuarios - ERROR - Error al obtener usuarios: connection pool exhausted
+2026-08-12 21:30:25 - AplicacionUsuarios - WARNING - Intento de listar usuarios - lista vacia
+2026-08-12 21:30:28 - AplicacionUsuarios - INFO - Aplicacion iniciada
+2026-08-12 21:30:36 - AplicacionUsuarios - INFO - Pool de conexiones creado
+2026-08-12 21:30:36 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:30:36 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:30:36 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 3
+2026-08-12 21:30:36 - AplicacionUsuarios - INFO - Se obtuvieron 3 usuarios
+2026-08-12 21:30:36 - AplicacionUsuarios - INFO - Listado de usuarios mostrado
+2026-08-12 21:30:58 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:30:58 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:30:58 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 21:30:58 - AplicacionUsuarios - DEBUG - Usuario con ID 11 obtenido
+2026-08-12 21:31:01 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:31:01 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:31:01 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 1
+2026-08-12 21:31:01 - AplicacionUsuarios - INFO - Usuario con ID 11 eliminado
+2026-08-12 21:31:02 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:31:02 - AplicacionUsuarios - INFO - Conexión obtenida del pool
+2026-08-12 21:31:02 - AplicacionUsuarios - INFO - Consulta ejecutada. Filas afectadas: 2
+2026-08-12 21:31:02 - AplicacionUsuarios - INFO - Se obtuvieron 2 usuarios
+2026-08-12 21:31:02 - AplicacionUsuarios - INFO - Listado de usuarios mostrado
+2026-08-12 21:31:17 - AplicacionUsuarios - WARNING - Opcion invalida ingresada: 50
+2026-08-12 21:31:31 - AplicacionUsuarios - INFO - Aplicacion cerrada correctamente
