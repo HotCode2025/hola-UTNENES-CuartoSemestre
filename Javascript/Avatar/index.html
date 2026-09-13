@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LA LEYENDA DE AANG: AVATAR</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <button id="boton-reglas">Mostrar Reglas</button>
+    <div class="reglas-juego" id="reglas-contenedor" style="display: none">
+      <p>
+        1-Selecciona a tu personaje , asi la pc elige tu contrincante de manera
+        aleatoria
+      </p>
+      <p>2-Ambos tienen 3 vidas</p>
+      <p>3-Elegir ataques:</p>
+      <p>Patada le gana a puño</p>
+      <p>Puño le gana a barrida</p>
+      <p>Barrida le gana a patada</p>
+    </div>
+
+    <h1>AVATAR 🔥 💦 🌱 🌪️</h1>
+    <section id="Escojer-personaje">
+      <h2>Elije tu personaje 👥</h2>
+      <div class="personajes-container">
+        <div class="personaje-card">
+          <img src="./img/zuko.jpg" alt="Zuko" class="personaje-img" />
+          <label for="zuko">🔥 Zuko</label>
+          <input type="radio" name="personaje" id="zuko" />
+        </div>
+
+        <div class="personaje-card">
+          <img src="./img/katara.jpg" alt="Katara" class="personaje-img" />
+          <label for="katara">💦 Katara</label>
+          <input type="radio" name="personaje" id="katara" />
+        </div>
+
+        <div class="personaje-card">
+          <img src="./img/aang.jpg" alt="Aang" class="personaje-img" />
+          <label for="aang">🌪️ Aang</label>
+          <input type="radio" name="personaje" id="aang" />
+        </div>
+
+        <div class="personaje-card">
+          <img src="./img/toph.jpg" alt="Toph" class="personaje-img" />
+          <label for="toph">🌱 Toph</label>
+          <input type="radio" name="personaje" id="toph" />
+        </div>
+      </div>
+
+      <button id="boton-personaje">▶ Seleccionar ◀</button>
+    </section>
+
+    <section id="mensajes" style="display: none">
+      <p>🧑 Tu Elección: <span id="heroe-eleccion">-</span></p>
+      <p>👹 Tu enemigo: <span id="enemigo-eleccion">-</span></p>
+      <p id="resultado-combate">
+        Selecciona un personaje y comienza el combate...
+      </p>
+    </section>
+    <section id="Seleccionar-ataque" style="display: none">
+      <h2>⚔️ Elige tu ataque</h2>
+      <div class="vidas-container">
+        <p>🧑 Tu personaje tiene <span id="vida-jugador">3</span> ❤️</p>
+        <p>👹 El enemigo tiene <span id="vida-enemigo">3</span> ❤️</p>
+      </div>
+      <div class="botones-ataque">
+        <button id="boton-punio">👊 Puño</button>
+        <button id="boton-patada">🦵 Patada</button>
+        <button id="boton-barrida">🌀 Barrida</button>
+      </div>
+    </section>
+
+    <section id="Reiniciar">
+      <button id="boton-reiniciar">🔄 Reiniciar Juego 🔄</button>
+    </section>
+
+    <script src="./js/personajes.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
