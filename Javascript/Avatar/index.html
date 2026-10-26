@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LA LEYENDA DE AANG: AVATAR</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <button id="boton-reglas">Mostrar Reglas</button>
+    <div class="reglas-juego" id="reglas-contenedor" style="display: none">
+      <p>
+        1-Selecciona a tu personaje, así la PC elige tu contrincante de manera aleatoria.
+      </p>
+      <p>2-Ambos tienen 3 vidas.</p>
+      <p>3-Moverte en el mapa con las flechas del teclado hasta encontrar a tu rival.</p>
+      <p>4-Elegir ataques: Patada le gana a puño | Puño le gana a barrida | Barrida le gana a patada</p>
+    </div>
+
+    <h1>AVATAR 🔥 💦 🌱 🌪️</h1>
+
+    <!-- Sección 1: Selección de Personaje -->
+    <section id="Escojer-personaje">
+      <h2>Elije tu personaje 👥</h2>
+      <div class="personajes-container" id="contenedorTarjetas"></div>
+      <button id="boton-personaje">▶ Seleccionar ◀</button>
+    </section>
+
+    <!-- Sección 2: Mapa Canvas -->
+    <section id="ver-mapa" style="display: none">
+      <h2>Recorre el mapa con tu personaje 🗺️</h2>
+      <canvas id="mapa"></canvas>
+      <p style="font-size: 14px; color: #a0a0a0;">Móvete con las flechas del teclado ⬆️ ⬇️ ⬅️ ➡️</p>
+    </section>
+
+    <!-- Sección 3: Mensajes del Estado -->
+    <section id="mensajes" style="display: none">
+      <p>🧑 Tu Elección: <span id="heroe-eleccion">-</span></p>
+      <p>👹 Tu enemigo: <span id="enemigo-eleccion">-</span></p>
+      <div id="resultado-combate">
+        Selecciona un personaje y comienza el combate...
+      </div>
+    </section>
+
+    <!-- Sección 4: Selección de Ataques -->
+    <section id="Seleccionar-ataque" style="display: none">
+      <h2>⚔️ Elige tu ataque</h2>
+      <div class="vidas-container">
+        <p>🧑 Tu personaje tiene <span id="vida-jugador">3</span> ❤️</p>
+        <p>👹 El enemigo tiene <span id="vida-enemigo">3</span> ❤️</p>
+      </div>
+      <div class="botones-ataque">
+        <button id="boton-punio">👊 Puño</button>
+        <button id="boton-patada">🦵 Patada</button>
+        <button id="boton-barrida">🌀 Barrida</button>
+      </div>
+    </section>
+
+    <!-- Sección 5: Reiniciar -->
+    <section id="Reiniciar" style="display: none">
+      <button id="boton-reiniciar">🔄 Reiniciar Juego 🔄</button>
+    </section>
+
+    <script src="./js/personajes.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
