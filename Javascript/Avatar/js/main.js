@@ -7,16 +7,32 @@ let personajeEnemigo = null;
 let personajeJugadorObjeto = null;
 let personajeEnemigoObjeto = null;
 
-// Carga del mapa oficial de Avatar
+// Elementos de Audio HTML5
+const musicaFondo = document.getElementById("musica-fondo");
+const sonidoAtaque = document.getElementById("sonido-ataque");
+const botonMusica = document.getElementById("boton-musica");
+
+// Inicializamos la música desactivada por defecto para evitar bloqueos del navegador
+let musicaEncendida = false;
+
+if (musicaFondo) {
+    musicaFondo.volume = 0.08; // Volumen sutil (8%)
+}
+
+if (botonMusica) {
+    botonMusica.textContent = "🔇 Música OFF";
+}
+
+// Carga del mapa de fondo
 let mapaBackground = new Image();
 mapaBackground.src = './img/mapa.jpg';
 
-// Referencias al Canvas
+// Canvas
 const mapa = document.getElementById('mapa');
 const lienzo = mapa ? mapa.getContext('2d') : null;
 let intervalo = null;
 
-// Referencias al DOM
+// DOM
 const spanHeroeEleccion = document.getElementById("heroe-eleccion");
 const spanEnemigoEleccion = document.getElementById("enemigo-eleccion");
 const spanVidaJugador = document.getElementById("vida-jugador");
@@ -36,6 +52,23 @@ const botonPunio = document.getElementById("boton-punio");
 const botonBarrida = document.getElementById("boton-barrida");
 const botonReiniciar = document.getElementById("boton-reiniciar");
 
+// Función Mute / Unmute manual
+function toggleMusica() {
+    if (!musicaFondo) return;
+    
+    if (musicaEncendida) {
+        musicaFondo.pause();
+        musicaEncendida = false;
+        if (botonMusica) botonMusica.textContent = "🔇 Música OFF";
+    } else {
+        musicaFondo.volume = 0.08; // Volumen ambiental sutil
+        musicaFondo.play().then(() => {
+            musicaEncendida = true;
+            if (botonMusica) botonMusica.textContent = "🔊 Música ON";
+        }).catch(e => console.log("Error al reproducir música:", e));
+    }
+}
+
 function toggleReglas() {
     const reglasDiv = document.getElementById("reglas-contenedor");
     if (!reglasDiv) return;
@@ -48,6 +81,13 @@ function toggleReglas() {
     }
 }
 
+function reproducirSonidoAtaque() {
+    if (!sonidoAtaque) return;
+    sonidoAtaque.currentTime = 0; // Reinicia el audio WAV al instante
+    sonidoAtaque.volume = 1.0;
+    sonidoAtaque.play().catch(e => console.log("Error al reproducir ataque:", e));
+}
+
 function obtenerObjetoPersonaje(nombre) {
     for (let i = 0; i < avatares.length; i++) {
         if (nombre === avatares[i].nombre) {
@@ -55,31 +95,6 @@ function obtenerObjetoPersonaje(nombre) {
         }
     }
     return avatares[0];
-}
-
-function posicionarSegunNacion(personajeObjeto) {
-    switch (personajeObjeto.nombre) {
-        case 'Zuko':
-            personajeObjeto.x = 130;
-            personajeObjeto.y = 180;
-            break;
-        case 'Katara':
-            personajeObjeto.x = 280;
-            personajeObjeto.y = 280;
-            break;
-        case 'Aang':
-            personajeObjeto.x = 230;
-            personajeObjeto.y = 250;
-            break;
-        case 'Toph':
-            personajeObjeto.x = 380;
-            personajeObjeto.y = 140;
-            break;
-        default:
-            personajeObjeto.x = 50;
-            personajeObjeto.y = 50;
-            break;
-    }
 }
 
 function seleccionarPersonajeJugador() {
@@ -92,13 +107,13 @@ function seleccionarPersonajeJugador() {
     const indice = Number(radioSeleccionado.value);
     personajeJugador = avatares[indice];
     personajeSeleccionado = true;
-    
+
     let opcionesEnemigo = avatares.filter(a => a.nombre !== personajeJugador.nombre);
     personajeEnemigo = opcionesEnemigo[Math.floor(Math.random() * opcionesEnemigo.length)];
 
     if (spanHeroeEleccion) spanHeroeEleccion.textContent = personajeJugador.nombre;
     if (spanEnemigoEleccion) spanEnemigoEleccion.textContent = personajeEnemigo.nombre;
-    if (pResultadoCombate) pResultadoCombate.textContent = "Recorre el mapa desde tu Nación hasta encontrar a tu rival...";
+    if (pResultadoCombate) pResultadoCombate.textContent = "Mueve tu personaje con las flechas hasta encontrar a tu rival en el mapa...";
 
     if (seccionPersonaje) seccionPersonaje.style.display = "none";
     
@@ -117,16 +132,24 @@ function iniciarMapa() {
     mapa.height = 360;
     
     personajeJugadorObjeto = obtenerObjetoPersonaje(personajeJugador.nombre);
-    personajeEnemigoObjeto = obtenerObjetoPersonaje(personajeEnemigo.nombre);
-
-    posicionarSegunNacion(personajeJugadorObjeto);
-    posicionarSegunNacion(personajeEnemigoObjeto);
     
+    personajeEnemigoObjeto = new Avatar(
+        personajeEnemigo.nombre,
+        personajeEnemigo.foto,
+        5,
+        personajeEnemigo.fotoMapa,
+        380,
+        130
+    );
+
+    personajeJugadorObjeto.x = 60;
+    personajeJugadorObjeto.y = 130;
+
     window.addEventListener('keydown', sePresionoUnaTecla);
     window.addEventListener('keyup', detenerMovimiento);
     
     if (intervalo) clearInterval(intervalo);
-    intervalo = setInterval(pintarCanvas, 50);
+    intervalo = setInterval(pintarCanvas, 30);
 }
 
 function pintarCanvas() {
@@ -149,28 +172,44 @@ function pintarCanvas() {
         lienzo.fillRect(0, 0, mapa.width, mapa.height);
     }
 
-    personajeJugadorObjeto.pintarAvatar(lienzo);
-    personajeEnemigoObjeto.pintarAvatar(lienzo);
+    personajeJugadorObjeto.pintarAvatares();
+    if (personajeEnemigoObjeto) {
+        personajeEnemigoObjeto.pintarAvatares();
+    }
 
-    revisarColision();
+    if (personajeJugadorObjeto.velocidadX !== 0 || personajeJugadorObjeto.velocidadY !== 0) {
+        revisarColision();
+    }
 }
 
 function revisarColision() {
-    const p1 = personajeJugadorObjeto;
-    const p2 = personajeEnemigoObjeto;
+    if (!personajeEnemigoObjeto) return;
+
+    const arribaEnemigo = personajeEnemigoObjeto.y;
+    const abajoEnemigo = personajeEnemigoObjeto.y + personajeEnemigoObjeto.alto;
+    const derechaEnemigo = personajeEnemigoObjeto.x + personajeEnemigoObjeto.ancho;
+    const izquierdaEnemigo = personajeEnemigoObjeto.x;
+
+    const arribaPersonaje = personajeJugadorObjeto.y;
+    const abajoPersonaje = personajeJugadorObjeto.y + personajeJugadorObjeto.alto;
+    const derechaPersonaje = personajeJugadorObjeto.x + personajeJugadorObjeto.ancho;
+    const izquierdaPersonaje = personajeJugadorObjeto.x;
 
     if (
-        p1.x < p2.x + p2.ancho &&
-        p1.x + p1.ancho > p2.x &&
-        p1.y < p2.y + p2.alto &&
-        p1.y + p1.alto > p2.y
+        abajoPersonaje < arribaEnemigo ||
+        arribaPersonaje > abajoEnemigo ||
+        derechaPersonaje < izquierdaEnemigo ||
+        izquierdaPersonaje > derechaEnemigo
     ) {
-        detenerMovimiento();
-        clearInterval(intervalo);
-        if (pResultadoCombate) pResultadoCombate.textContent = "¡Encontraste a " + personajeEnemigo.nombre + "! ¡Elige tu ataque!";
-        if (seccionMensajes) seccionMensajes.style.display = "block";
-        if (seccionAtaque) seccionAtaque.style.display = "block";
+        return;
     }
+
+    detenerMovimiento();
+
+    if (seccionAtaque) seccionAtaque.style.display = 'block';
+    if (seccionMensajes) seccionMensajes.style.display = 'block';
+
+    pResultadoCombate.textContent = "¡Encontraste a " + personajeEnemigo.nombre + "! Elige tu ataque para luchar en el mapa.";
 }
 
 function moverDerecha() { personajeJugadorObjeto.velocidadX = 6; }
@@ -203,6 +242,38 @@ function sePresionoUnaTecla(event) {
     }
 }
 
+function animarAtaqueCanvas(atacante, victima) {
+    reproducirSonidoAtaque();
+
+    let xOriginal = atacante.x;
+    let yOriginal = atacante.y;
+    let xDestino = victima.x;
+    let yDestino = victima.y;
+
+    let frames = 0;
+    let totalFrames = 10;
+
+    let intervalAnim = setInterval(() => {
+        frames++;
+        
+        if (frames <= totalFrames / 2) {
+            atacante.x += (xDestino - xOriginal) / (totalFrames / 2);
+            atacante.y += (yDestino - yOriginal) / (totalFrames / 2);
+        } else if (frames <= totalFrames) {
+            atacante.x -= (xDestino - xOriginal) / (totalFrames / 2);
+            atacante.y -= (yDestino - yOriginal) / (totalFrames / 2);
+        } else {
+            atacante.x = xOriginal;
+            atacante.y = yOriginal;
+            clearInterval(intervalAnim);
+
+            victima.recibiendoDanio = true;
+            setTimeout(() => { victima.recibiendoDanio = false; }, 250);
+        }
+        pintarCanvas();
+    }, 20);
+}
+
 function generaAtaqueEnemigo() {
     const ataques = ["Patada", "Puño", "Barrida"];
     return ataques[Math.floor(Math.random() * ataques.length)];
@@ -221,7 +292,7 @@ function determinarGanador(ataqueJugador, ataqueEnemigo) {
 }
 
 function ejecutarCombate(ataqueJugador) {
-    if (!personajeSeleccionado) return;
+    if (!personajeSeleccionado || !personajeEnemigoObjeto) return;
 
     const ataqueEnemigo = generaAtaqueEnemigo();
     const ganador = determinarGanador(ataqueJugador, ataqueEnemigo);
@@ -230,11 +301,14 @@ function ejecutarCombate(ataqueJugador) {
     if (spanEnemigoEleccion) spanEnemigoEleccion.textContent = ataqueEnemigo;
 
     if (ganador === "empate") {
+        animarAtaqueCanvas(personajeJugadorObjeto, personajeEnemigoObjeto);
         if (pResultadoCombate) pResultadoCombate.textContent = "¡EMPATE! Ambos atacaron con " + ataqueJugador;
     } else if (ganador === "jugador") {
+        animarAtaqueCanvas(personajeJugadorObjeto, personajeEnemigoObjeto);
         vidasEnemigo--;
         if (pResultadoCombate) pResultadoCombate.textContent = "¡GANASTE! Tu " + ataqueJugador + " venció al " + ataqueEnemigo + " de " + personajeEnemigo.nombre + ".";
     } else {
+        animarAtaqueCanvas(personajeEnemigoObjeto, personajeJugadorObjeto);
         vidasJugador--;
         if (pResultadoCombate) pResultadoCombate.textContent = "¡PERDISTE! El " + ataqueEnemigo + " de " + personajeEnemigo.nombre + " venció a tu " + ataqueJugador + ".";
     }
@@ -265,6 +339,7 @@ function reiniciarJuego() {
     personajeSeleccionado = false;
     personajeJugador = null;
     personajeEnemigo = null;
+    personajeEnemigoObjeto = null;
     if (intervalo) clearInterval(intervalo);
 
     document.querySelectorAll('input[name="personaje"]').forEach((radio) => {
@@ -289,6 +364,7 @@ function reiniciarJuego() {
     if (seccionPersonaje) seccionPersonaje.style.display = "block";
 }
 
+if (botonMusica) botonMusica.addEventListener("click", toggleMusica);
 if (botonReglas) botonReglas.addEventListener("click", toggleReglas);
 if (botonPersonaje) botonPersonaje.addEventListener("click", seleccionarPersonajeJugador);
 if (botonPatada) botonPatada.addEventListener("click", () => ejecutarCombate("Patada"));
