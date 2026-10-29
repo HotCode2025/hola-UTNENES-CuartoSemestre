@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "nombre": "María Gómez",
+    "foto_perfil": "maria.jpg",
+    "categoria": "Textiles",
+    "ubicacion": "Valle de Uco, Mendoza",
+    "historia": "Comencé mi emprendimiento en el año 2018 elaborando tejidos artesanales a telar con lana de oveja 100% natural. Mi objetivo es mantener viva la tradición textil del Valle de Uco, combinando técnicas ancestrales con diseños contemporáneos.",
+    "suscripcion": "Premium",
+    "productos": [
+      {
+        "id": 101,
+        "nombre": "Manta Andina",
+        "descripcion": "Manta artesanal tejida a mano con lana de oveja natural.",
+        "precio": 25000,
+        "stock": 5,
+        "categoria": "Textiles",
+        "imagen": "manta.jpg",
+        "destacado": true,
+        "artesano_id": 1
+      },
+      {
+        "id": 102,
+        "nombre": "Camino de Mesa Rústico",
+        "descripcion": "Tejido a telar con terminaciones en flecos.",
+        "precio": 12000,
+        "stock": 8,
+        "categoria": "Textiles",
+        "imagen": "camino.jpg",
+        "destacado": false,
+        "artesano_id": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Lucas Peralta",
+    "foto_perfil": "lucas.jpg",
+    "categoria": "Cerámica",
+    "ubicacion": "San Rafael, Mendoza",
+    "historia": "Modelador y ceramista desde hace 10 años. Elaboro vajilla y piezas decorativas utilizando arcillas locales y esmaltes libres de plomo horneados a alta temperatura.",
+    "suscripcion": "Básica",
+    "productos": [
+      {
+        "id": 103,
+        "nombre": "Taza Cerámica Artesanal",
+        "descripcion": "Taza de barro esmaltada ideal para café o té.",
+        "precio": 8500,
+        "stock": 12,
+        "categoria": "Cerámica",
+        "imagen": "taza.jpg",
+        "destacado": false,
+        "artesano_id": 2
+      }
+    ]
+  }
+]

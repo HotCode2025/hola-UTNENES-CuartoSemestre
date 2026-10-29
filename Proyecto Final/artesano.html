@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conoce al Artesano | Raíces Locales</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-main">
+
+  <header class="navbar">
+    <a href="index.html" class="logo">🌱 Raíces Locales</a>
+    <nav>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="carrito.html">Carrito 🛒</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="perfil-artesano" class="artesano-card">
+      <div class="artesano-header">
+        <img id="artesano-foto" src="" alt="Foto de perfil" class="artesano-avatar">
+        <div class="artesano-info">
+          <h1 id="artesano-nombre">Cargando...</h1>
+          <p id="artesano-ubicacion" class="ubicacion">📍 </p>
+          <span id="artesano-badge" class="badge"></span>
+        </div>
+      </div>
+
+      <div class="artesano-historia">
+        <h2>Su Historia</h2>
+        <p id="artesano-historia-texto"></p>
+      </div>
+    </section>
+
+    <section class="artesano-productos">
+      <h2>Productos de <span id="artesano-nombre-catalogo"></span></h2>
+      <div id="grid-productos-artesano" class="grid-cards">
+        <!-- Se inyectan las cards dinámicamente -->
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/artesano.js"></script>
+</body>
+</html>

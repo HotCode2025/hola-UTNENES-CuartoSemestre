@@ -1,0 +1,119 @@
+:root {
+  --primary: #2E7D32;
+  --secondary: #C65D3B;
+  --background: #F8F5F0;
+  --dark: #333333;
+  --premium: #D4AF37;
+  --white: #FFFFFF;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background);
+  color: var(--dark);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Header & Nav */
+.navbar {
+  background-color: var(--primary);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar nav a {
+  margin-left: 1.5rem;
+}
+
+/* Perfil Artesano */
+.artesano-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+}
+
+.artesano-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.artesano-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+  background-color: #eee;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  background-color: var(--premium);
+  color: var(--dark);
+}
+
+.artesano-historia {
+  margin-top: 1.5rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.artesano-historia h2 {
+  color: var(--secondary);
+}
+
+/* Grilla de Productos */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.card-producto {
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-top: 4px solid var(--primary);
+}
+
+.precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.btn-detalle {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background-color: var(--secondary);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
