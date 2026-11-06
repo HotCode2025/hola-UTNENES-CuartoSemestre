@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Raíces Locales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="co-body">
+
+  <!-- ================= ENCABEZADO ================= -->
+  <header class="co-header">
+    <a href="index.html" class="co-logo">🌱 Raíces Locales</a>
+    <nav aria-label="Navegación principal">
+      <a href="catalogo.html" data-destino="catalogo">Catálogo</a>
+      <a href="carrito.html" data-destino="carrito">Carrito</a>
+      <a href="usuario/perfil.html">Mi cuenta</a>
+    </nav>
+
+    <ol class="co-pasos" aria-label="Progreso de la compra">
+      <li class="hecho">Carrito</li>
+      <li class="activo" id="paso-datos">Datos</li>
+      <li id="paso-pago">Pago</li>
+      <li id="paso-confirmacion">Confirmación</li>
+    </ol>
+  </header>
+
+  <main class="co-main">
+
+    <!-- ================= VISTA: CARRITO VACÍO ================= -->
+    <section id="vista-vacio" class="co-card co-vacio" hidden>
+      <div class="co-vacio-icono">🛒</div>
+      <h1>Tu carrito está vacío</h1>
+      <p>Agregá productos del catálogo para poder finalizar la compra.</p>
+      <a href="catalogo.html" class="btn btn-primario" data-destino="catalogo">Ir al catálogo</a>
+    </section>
+
+    <!-- ================= VISTA: CHECKOUT ================= -->
+    <section id="vista-checkout" class="co-grid" hidden>
+
+      <form id="form-checkout" class="co-card co-form" novalidate>
+        <h1 class="co-titulo">Finalizá tu compra</h1>
+
+        <!-- 1. Datos del comprador -->
+        <fieldset>
+          <legend><span class="co-num">1</span> Tus datos</legend>
+          <div class="co-fila">
+            <div class="campo">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="given-name" required>
+              <small class="error" data-error="nombre"></small>
+            </div>
+            <div class="campo">
+              <label for="apellido">Apellido</label>
+              <input id="apellido" name="apellido" type="text" autocomplete="family-name" required>
+              <small class="error" data-error="apellido"></small>
+            </div>
+          </div>
+          <div class="co-fila">
+            <div class="campo">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@email.com" required>
+              <small class="error" data-error="email"></small>
+            </div>
+            <div class="campo">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" name="telefono" type="tel" autocomplete="tel" placeholder="261 555 1234" required>
+              <small class="error" data-error="telefono"></small>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 2. Entrega -->
+        <fieldset>
+          <legend><span class="co-num">2</span> Entrega</legend>
+          <div class="co-opciones">
+            <label class="opcion">
+              <input type="radio" name="envio" value="retiro" checked>
+              <span class="opcion-cuerpo">
+                <strong>Retiro en el taller del artesano</strong>
+                <small>Coordinás día y horario por e-mail</small>
+              </span>
+              <span class="opcion-precio">Gratis</span>
+            </label>
+            <label class="opcion">
+              <input type="radio" name="envio" value="domicilio">
+              <span class="opcion-cuerpo">
+                <strong>Envío a domicilio</strong>
+                <small>Llega en 3 a 5 días hábiles</small>
+              </span>
+              <span class="opcion-precio" id="precio-envio"></span>
+            </label>
+          </div>
+
+          <div id="datos-domicilio" class="co-domicilio" hidden>
+            <div class="campo">
+              <label for="direccion">Calle y número</label>
+              <input id="direccion" name="direccion" type="text" autocomplete="street-address">
+              <small class="error" data-error="direccion"></small>
+            </div>
+            <div class="co-fila">
+              <div class="campo">
+                <label for="ciudad">Ciudad</label>
+                <input id="ciudad" name="ciudad" type="text" autocomplete="address-level2">
+                <small class="error" data-error="ciudad"></small>
+              </div>
+              <div class="campo campo-chico">
+                <label for="cp">Código postal</label>
+                <input id="cp" name="cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="8">
+                <small class="error" data-error="cp"></small>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 3. Pago -->
+        <fieldset>
+          <legend><span class="co-num">3</span> Pago</legend>
+          <p id="aviso-cuenta">La compra y su historial quedarán vinculados a tu cuenta.</p>
+          <div class="co-mp-info">
+            <span class="mp-insignia">MP</span>
+            <p>Vas a pagar con <strong>Mercado Pago</strong> de forma segura. Podés usar tarjeta de crédito, débito o efectivo.</p>
+          </div>
+          <p class="co-modo" id="modo-pago"></p>
+        </fieldset>
+
+        <button type="submit" class="btn btn-mp btn-bloque">Pagar con Mercado Pago</button>
+        <p class="error co-error-pago" id="error-pago" role="alert"></p>
+        <p class="co-aviso">🔒 Proyecto académico: Mercado Pago en modo prueba, sin cobros reales.</p>
+      </form>
+
+      <!-- Resumen del pedido -->
+      <aside class="co-card co-resumen" aria-labelledby="titulo-resumen">
+        <h2 id="titulo-resumen">Resumen de compra</h2>
+        <ul id="lista-items" class="co-items"></ul>
+
+        <dl class="co-totales">
+          <div><dt>Subtotal</dt><dd id="subtotal"></dd></div>
+          <div><dt>Envío</dt><dd id="envio"></dd></div>
+          <div class="co-total"><dt>Total</dt><dd id="total"></dd></div>
+        </dl>
+
+        <a href="carrito.html" class="btn btn-link" data-destino="carrito">← Volver al carrito</a>
+      </aside>
+    </section>
+
+    <!-- ================= VISTA: RESULTADO DEL PAGO ================= -->
+    <section id="vista-resultado" class="co-card co-resultado" hidden aria-live="polite"></section>
+
+  </main>
+
+  <!-- ================= MODAL: MERCADO PAGO SIMULADO ================= -->
+  <div id="mp-modal" class="mp-overlay" hidden>
+    <div class="mp-ventana" role="dialog" aria-modal="true" aria-labelledby="mp-titulo">
+
+      <div class="mp-cabecera">
+        <div>
+          <span class="mp-marca">mercado pago <em>· simulación</em></span>
+          <h2 id="mp-titulo">Pagás <span id="mp-monto"></span></h2>
+        </div>
+        <button type="button" class="mp-cerrar" id="mp-cerrar" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="mp-cuerpo">
+
+        <!-- Paso A: elegir medio de pago -->
+        <div id="mp-paso-metodo">
+          <p class="mp-subtitulo">¿Cómo querés pagar?</p>
+          <button type="button" class="mp-metodo" data-metodo="credito">
+            <span class="mp-metodo-icono">💳</span>
+            <span><strong>Tarjeta de crédito</strong><small>Hasta 6 cuotas</small></span>
+          </button>
+          <button type="button" class="mp-metodo" data-metodo="debito">
+            <span class="mp-metodo-icono">🏦</span>
+            <span><strong>Tarjeta de débito</strong><small>Se acredita al instante</small></span>
+          </button>
+          <button type="button" class="mp-metodo" data-metodo="efectivo">
+            <span class="mp-metodo-icono">💵</span>
+            <span><strong>Efectivo</strong><small>Rapipago o Pago Fácil</small></span>
+          </button>
+        </div>
+
+        <!-- Paso B: datos de tarjeta -->
+        <form id="mp-form-tarjeta" novalidate hidden>
+          <p class="mp-subtitulo" id="mp-titulo-tarjeta">Tarjeta de crédito</p>
+
+          <div class="campo">
+            <label for="mp-numero">Número de tarjeta</label>
+            <div class="mp-input-marca">
+              <input id="mp-numero" type="text" inputmode="numeric" autocomplete="off" placeholder="1234 1234 1234 1234" maxlength="19">
+              <span id="mp-marca-detectada"></span>
+            </div>
+            <small class="error" data-error="numero"></small>
+          </div>
+
+          <div class="campo">
+            <label for="mp-titular">Nombre del titular</label>
+            <input id="mp-titular" type="text" autocomplete="off" placeholder="Como figura en la tarjeta">
+            <small class="error" data-error="titular"></small>
+          </div>
+
+          <div class="co-fila">
+            <div class="campo">
+              <label for="mp-vencimiento">Vencimiento</label>
+              <input id="mp-vencimiento" type="text" inputmode="numeric" autocomplete="off" placeholder="MM/AA" maxlength="5">
+              <small class="error" data-error="vencimiento"></small>
+            </div>
+            <div class="campo">
+              <label for="mp-cvv">Código de seguridad</label>
+              <input id="mp-cvv" type="password" inputmode="numeric" autocomplete="off" placeholder="123" maxlength="4">
+              <small class="error" data-error="cvv"></small>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="mp-dni">DNI del titular</label>
+            <input id="mp-dni" type="text" inputmode="numeric" autocomplete="off" placeholder="Sin puntos" maxlength="8">
+            <small class="error" data-error="dni"></small>
+          </div>
+
+          <div class="campo" id="mp-campo-cuotas">
+            <label for="mp-cuotas">Cuotas</label>
+            <select id="mp-cuotas"></select>
+          </div>
+
+          <details class="mp-ayuda">
+            <summary>🧪 Datos de prueba</summary>
+            <p>Tarjetas: <code>4509 9535 6623 3704</code> (Visa) o <code>5031 7557 3453 0604</code> (Mastercard). Vencimiento <code>11/30</code>, código <code>123</code>, DNI <code>12345678</code>.</p>
+            <p>El <strong>nombre del titular</strong> define el resultado:</p>
+            <ul>
+              <li><code>APRO</code> → pago aprobado</li>
+              <li><code>CONT</code> → pago pendiente</li>
+              <li><code>OTHE</code> → pago rechazado</li>
+            </ul>
+            <button type="button" class="btn btn-link" id="mp-autocompletar">Autocompletar con datos de prueba</button>
+          </details>
+
+          <button type="submit" class="btn btn-mp btn-bloque" id="mp-btn-pagar">Pagar</button>
+          <button type="button" class="btn btn-link mp-volver">← Elegir otro medio</button>
+        </form>
+
+        <!-- Paso C: efectivo -->
+        <div id="mp-paso-efectivo" hidden>
+          <p class="mp-subtitulo">Pago en efectivo</p>
+          <p>Vamos a generar un cupón para que pagues en cualquier sucursal de <strong>Rapipago</strong> o <strong>Pago Fácil</strong>. Tenés 3 días para pagarlo.</p>
+          <button type="button" class="btn btn-mp btn-bloque" id="mp-btn-efectivo">Generar cupón de pago</button>
+          <button type="button" class="btn btn-link mp-volver">← Elegir otro medio</button>
+        </div>
+
+        <!-- Paso D: procesando -->
+        <div id="mp-procesando" class="mp-procesando" hidden>
+          <div class="mp-spinner" aria-hidden="true"></div>
+          <p><strong>Procesando tu pago…</strong></p>
+          <small>No cierres esta ventana.</small>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Orden de carga: primero las clases, después la lógica de la página -->
+  <script src="js/models/Pedido.js"></script>
+  <script src="js/services/MercadoPagoService.js"></script>
+  <script src="js/pages/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "raices-locales-servidor-pagos",
+  "version": "1.0.0",
+  "description": "Servidor de pagos con Mercado Pago (sandbox) para Raíces Locales",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "author": "Matías Tobares - HOLA UTNENES",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "mercadopago": "^3.6.1",
+    "pg": "^8.16.3"
+  }
+}

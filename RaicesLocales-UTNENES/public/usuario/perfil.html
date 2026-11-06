@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <a class="logo" href="../index.html">Raíces Locales</a>
+        <nav aria-label="Navegación de usuario">
+            <a href="../index.html">Inicio</a>
+            <a href="historial.html">Historial</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Mi perfil</h1>
+        <section class="tarjeta">
+            <h2 id="nombreUsuario"></h2>
+            <p id="emailUsuario"></p>
+            <a class="btn" href="historial.html">Ver historial de pedidos</a>
+        </section>
+        <p id="mensaje" role="alert"></p>
+        <button id="logout" type="button">Cerrar sesión</button>
+    </main>
+
+    <script src="../js/usuario/api.js"></script>
+    <script src="../js/usuario/perfil.js"></script>
+
+</body>
+</html>

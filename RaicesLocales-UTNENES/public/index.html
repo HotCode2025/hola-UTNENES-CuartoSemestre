@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explorá productos artesanales y conocé a sus creadores en Raíces Locales.">
+  <title>Raíces Locales | Inicio</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html">Raíces Locales</a>
+    <nav aria-label="Navegación principal">
+      <a href="catalogo.html">Catálogo</a>
+      <a href="artesano.html?id=1">Artesanos</a>
+      <a href="carrito.html">Carrito</a>
+      <a href="usuario/login.html">Ingresar</a>
+    </nav>
+  </header>
+
+  <main class="container inicio">
+    <section class="hero">
+      <p class="etiqueta">Artesanía local, historias reales</p>
+      <h1>Conecta con el arte de tu gente</h1>
+      <p>Descubrí productos artesanales cargados desde la base de datos y conocé las historias de quienes los crean.</p>
+      <a class="btn btn-primario" href="catalogo.html">Explorar el catálogo</a>
+    </section>
+
+    <section class="seccion-inicio" aria-labelledby="secciones-titulo">
+      <div class="seccion-encabezado">
+        <p class="etiqueta">Raíces Locales</p>
+        <h2 id="secciones-titulo">Explorá el proyecto</h2>
+        <p>Explorá productos y perfiles cargados desde la base de datos.</p>
+      </div>
+
+      <div class="grilla-secciones">
+        <article class="tarjeta">
+          <h3>Catálogo</h3>
+          <p>Buscá productos cargados desde PostgreSQL, filtrá por categoría y elegí cómo ordenarlos.</p>
+          <a class="btn btn-secundario" href="catalogo.html">Abrir catálogo</a>
+        </article>
+
+        <article class="tarjeta">
+          <h3>Artesanos</h3>
+          <p>Consultá el perfil de muestra y los productos asociados.</p>
+          <a class="btn btn-secundario" href="artesano.html?id=1">Ver perfil de muestra</a>
+        </article>
+
+        <article class="tarjeta">
+          <h3>Carrito y checkout</h3>
+          <p>Finalizá la compra con tu cuenta. El pedido se valida y se guarda en PostgreSQL.</p>
+          <div class="acciones-tarjeta">
+            <a class="btn btn-secundario" href="carrito.html">Abrir carrito</a>
+            <a class="btn btn-secundario" href="checkout.html">Abrir checkout</a>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <h3>Cuenta de usuario</h3>
+          <p>Creá una cuenta segura para guardar tus pedidos y consultar tu historial.</p>
+          <a class="btn btn-secundario" href="usuario/registro.html">Ir al registro</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Raíces Locales · Proyecto académico en desarrollo</p>
+  </footer>
+</body>
+</html>

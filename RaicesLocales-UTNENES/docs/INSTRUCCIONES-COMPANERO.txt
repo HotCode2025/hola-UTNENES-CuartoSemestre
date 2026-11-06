@@ -1,0 +1,239 @@
+RAICES LOCALES - PREPARAR LA BASE DE DATOS Y PROBAR EL SITIO
+===========================================================
+
+Esta guia sirve para configurar el proyecto en tu computadora, cargar las tablas
+desde pgAdmin y recorrer las pantallas mientras trabajas en los estilos e
+imagenes. Los productos, artesanos, usuarios y pedidos de la aplicacion se
+consultan o guardan en PostgreSQL. El carrito sin confirmar queda temporalmente
+en el navegador.
+
+
+1. DESCARGAR EL PROYECTO
+------------------------
+
+1. Clona el repositorio de GitHub o actualiza tu copia local para tener la
+   version mas reciente.
+2. Abre la carpeta del proyecto en Visual Studio Code.
+3. Comprueba que tienes instalados Node.js, PostgreSQL y pgAdmin 4.
+
+No subas archivos .env, contrasenas, tokens ni credenciales personales a GitHub.
+
+
+2. CREAR O SELECCIONAR LA BASE EN PGADMIN
+-----------------------------------------
+
+La configuracion de ejemplo del servidor usa estos valores:
+
+  Base de datos: artesanos
+  Host:          localhost
+  Puerto:        5432
+  Usuario:       postgres (o el usuario local que tengas configurado)
+
+Si ya tienes una base llamada artesanos con datos del proyecto, puedes usarla;
+no es necesario crear otra.
+
+Para crearla desde pgAdmin:
+
+1. Conecta pgAdmin a tu servidor PostgreSQL local.
+2. Haz clic derecho en Databases y elige Create > Database.
+3. Escribe artesanos como nombre y guarda.
+4. Selecciona la base artesanos en el arbol de pgAdmin.
+
+
+3. CREAR LAS TABLAS CON schema.sql
+----------------------------------
+
+1. En pgAdmin, selecciona la base artesanos y abre Tools > Query Tool.
+2. Desde el Query Tool, abre el archivo:
+
+     server/src/db/schema.sql
+
+   (En pgAdmin puedes usar el icono para abrir archivo. Tambien puedes abrir el
+   archivo en VS Code, copiar todo su contenido y pegarlo en Query Tool.)
+3. Ejecuta el SQL con el boton de ejecutar o la tecla F5.
+4. Confirma que la ejecucion termina sin errores.
+5. En el arbol de pgAdmin, haz clic derecho sobre Schemas > public > Tables y
+   elige Refresh.
+
+El esquema crea las tablas de artesanos, productos, usuarios, sesiones, pedidos
+y pedido_items. Ejecutarlo otra vez no borra los registros existentes.
+
+
+4. CARGAR PRODUCTOS Y ARTESANOS CON seed.sql
+--------------------------------------------
+
+Este paso es manual y opcional. Si quieres ver productos en el catalogo, ejecuta
+el seed desde pgAdmin:
+
+1. En Query Tool, confirma que la base seleccionada sea artesanos.
+2. Abre y ejecuta:
+
+     server/src/db/seed.sql
+
+3. Cuando termine, refresca Schemas > public > Tables.
+4. Para ver los registros, haz clic derecho en artesanos o productos y elige
+   View/Edit Data > All Rows.
+
+El archivo carga cinco artesanos y diez productos. Se puede ejecutar de nuevo:
+agrega los que falten y no reemplaza los datos que ya existan. La aplicacion no
+ejecuta este archivo por su cuenta. Tambien puedes cargar o modificar filas con
+SQL desde pgAdmin.
+
+Consultas para comprobar los datos:
+
+  SELECT id, nombre, categoria, ubicacion
+  FROM public.artesanos
+  ORDER BY id;
+
+  SELECT id, nombre, precio, stock, categoria, destacado, artesano_id
+  FROM public.productos
+  ORDER BY id;
+
+
+5. CONFIGURAR LA CONEXION DEL SERVIDOR
+--------------------------------------
+
+1. En VS Code, copia server/.env.example y crea un archivo llamado server/.env
+   en la misma carpeta.
+2. Abre server/.env y configura la conexion local de PostgreSQL. Por ejemplo:
+
+     PGHOST=localhost
+     PGPORT=5432
+     PGDATABASE=artesanos
+     PGUSER=postgres
+     PGPASSWORD=TU_CLAVE_LOCAL_DE_POSTGRES
+     PORT=3000
+     MP_ACCESS_TOKEN=
+
+   Cambia PGUSER y PGPASSWORD por los valores de tu instalacion local.
+   Deja MP_ACCESS_TOKEN vacio para usar el pago de prueba local; no hace falta
+   Mercado Pago para probar el catalogo y los pedidos. No copies el valor de
+   ejemplo APP_USR-XXXX como si fuera un token valido.
+3. Guarda server/.env. Este archivo es privado: no lo subas a GitHub ni lo
+   compartas por el chat del equipo.
+
+
+6. INSTALAR E INICIAR EL SITIO
+------------------------------
+
+Abre una terminal en VS Code y ejecuta:
+
+  cd server
+  npm install
+  npm start
+
+Si PowerShell bloquea npm.ps1, usa estos comandos en PowerShell:
+
+  npm.cmd install
+  npm.cmd start
+
+Deja la terminal abierta mientras uses el sitio. Abre las paginas desde
+http://localhost:3000; no uses Live Server ni abras los HTML con doble clic,
+porque el navegador necesita comunicarse con la API del servidor.
+
+Comprueba primero estas direcciones:
+
+  http://localhost:3000/api/salud/base-datos
+  http://localhost:3000/api/productos
+  http://localhost:3000/api/artesanos
+
+La primera debe indicar "conectada". Las otras muestran los registros que
+existen en tu PostgreSQL. Si no ejecutaste seed.sql, es normal que las listas
+estén vacias.
+
+
+7. RECORRER LAS PAGINAS PARA TRABAJAR LOS ESTILOS
+------------------------------------------------
+
+Abre estas direcciones en el navegador:
+
+  Inicio:          http://localhost:3000/
+  Catalogo:        http://localhost:3000/catalogo.html
+  Artesano:        http://localhost:3000/artesano.html?id=1
+  Carrito:         http://localhost:3000/carrito.html
+  Registro:        http://localhost:3000/usuario/registro.html
+  Iniciar sesion:  http://localhost:3000/usuario/login.html
+  Perfil:          http://localhost:3000/usuario/perfil.html
+  Historial:       http://localhost:3000/usuario/historial.html
+  Checkout:        http://localhost:3000/checkout.html
+
+Para recorrer la compra completa:
+
+1. Crea una cuenta desde Registro.
+2. Vuelve al catalogo, agrega un producto al carrito y abre el carrito.
+3. Finaliza el pedido. Si hace falta, inicia sesion con la cuenta que creaste.
+4. Completa los datos de entrega y elige un resultado de pago de prueba local.
+   Ese modo no cobra dinero, pero guarda el pedido y su estado en PostgreSQL.
+5. Comprueba el pedido en Perfil > Historial.
+
+Para ver los artesanos, productos y categorias con contenido, ejecuta seed.sql
+en pgAdmin. El SQL guarda el nombre del archivo, pero no incluye la imagen. Las
+paginas buscan las fotos en public/img; guarda solo el nombre del archivo en
+foto_perfil e imagen, sin anteponer "img/".
+
+Nombres que usa actualmente seed.sql:
+
+  Artesanos: maria.jpg, barro-vivo.jpg, raul-quiroga.jpg,
+             taller-cuyano.jpg, huerta-del-valle.jpg
+  Productos: manta-andina.jpg, bufanda.jpg, gorro.jpg, jarron.jpg,
+             mates.jpg, tabla.jpg, cuchara.jpg, billetera.jpg,
+             membrillo.jpg, miel.jpg
+
+Recomendaciones para preparar las imagenes:
+
+- Productos: formato JPG/JPEG, recorte cuadrado de 1200 x 1200 px.
+- Perfiles de artesanos: formato JPG/JPEG, recorte cuadrado de 800 x 800 px.
+- Comprime las fotos para web y procura que cada archivo pese menos de 300 KB.
+  Si una foto de perfil tiene mucho detalle, intenta mantenerla por debajo de
+  200 KB.
+- WebP tambien funciona en navegadores actuales y suele pesar menos. Si eliges
+  ese formato, cambia la extension guardada en las columnas imagen o
+  foto_perfil en PostgreSQL (y en seed.sql si vuelves a cargar los datos).
+- Usa PNG solo cuando necesites transparencia, por ejemplo para un logo.
+  Para iconos o marcas vectoriales puedes usar SVG.
+- Usa nombres simples, en minusculas, sin espacios ni tildes; por ejemplo:
+  manta-andina.jpg. El nombre tiene que coincidir exactamente con el guardado
+  en PostgreSQL, incluida la extension.
+- Guarda los archivos dentro de public/img/. No guardes imagenes como datos
+  binarios dentro de PostgreSQL.
+
+La hoja de estilos global ya esta creada en:
+
+  public/css/styles.css
+
+Todas las paginas HTML actuales la enlazan. Modifica ese archivo para cambiar
+colores, tipografia, encabezados, botones, tarjetas, formularios, espaciados y
+adaptacion a celular del sitio completo. Sus variables comunes estan al inicio,
+dentro de :root. Las tarjetas del catalogo usan, entre otras, las clases
+.catalogo, .card, .card__imagen, .card__cuerpo, .card__nombre, .card__precio y
+.card__acciones. Las fotos de las tarjetas se recortan para llenar su espacio;
+usa object-fit: cover y conserva una proporcion cuadrada para que el catalogo
+se vea parejo. No crees otra hoja global con el mismo proposito; si hiciera
+falta un estilo exclusivo de una pagina, coordina antes de agregar un archivo.
+
+
+8. CUIDADOS AL MODIFICAR HTML Y CSS
+-----------------------------------
+
+Los estilos compartidos estan en public/css/styles.css. Puedes agregar clases,
+contenedores y reglas CSS para mejorar el diseño, pero conserva los ganchos que
+usan los scripts:
+
+- No cambies ni elimines atributos id, name o data-* existentes en formularios,
+  botones y contenedores dinamicos.
+- No cambies los nombres de los formularios ni los tipos de los botones que
+  disparan acciones.
+- No elimines ni muevas las etiquetas script que cargan los archivos JavaScript.
+- No reemplaces el contenido de los contenedores que el sitio llena con datos
+  de la API, como #catalogo, #grid-productos-artesano, #pedido e #historial.
+- Las tarjetas de productos se crean desde JavaScript; puedes darles estilo
+  usando sus clases, pero evita reemplazar su contenido por productos escritos
+  a mano en el HTML.
+- Las pantallas de cuenta dependen de la sesion del servidor. No agregues
+  usuarios o contrasenas de prueba al HTML, JavaScript o localStorage.
+- Si necesitas cambiar estructura, selectores o comportamiento, coordinalo con
+  quien mantiene esa parte y prueba de nuevo el flujo completo.
+
+Al terminar, revisa las paginas anteriores desde localhost:3000 y confirma que
+el catalogo, el carrito, el registro, el checkout y el historial sigan
+funcionando. No incluyas server/.env en ningun commit.

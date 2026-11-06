@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrito | Raíces Locales</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <script type="module" src="./js/pages/carrito.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="./index.html">Raíces Locales</a>
+    <nav aria-label="Navegación principal">
+      <a href="./catalogo.html">Catálogo</a>
+      <a href="./artesano.html?id=1">Artesanos</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Carrito de compras</h1>
+    <section>
+      <h2>Tu pedido</h2>
+      <ul id="pedido"></ul>
+      <p id="total"></p>
+      <div class="card__acciones">
+        <button id="vaciar" type="button">Vaciar carrito</button>
+        <button id="finalizar" class="btn-primario" type="button" disabled>Finalizar pedido</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

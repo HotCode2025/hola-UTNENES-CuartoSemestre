@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explorá productos artesanales cargados desde la base de datos.">
+  <title>Catálogo | Raíces Locales</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="encabezado">
+    <a class="logo" href="index.html">🌱 Raíces Locales</a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="carrito.html">Carrito</a>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <h1>Catálogo</h1>
+    <p>Explorá productos artesanales disponibles en Raíces Locales.</p>
+    <section class="filtros" aria-label="Filtros del catálogo">
+      <input type="search" id="buscador" placeholder="Buscar productos...">
+      <select id="filtro-categoria" aria-label="Categoría"></select>
+      <select id="orden" aria-label="Ordenar por">
+        <option value="relevancia">Destacados primero</option>
+        <option value="precio-asc">Menor precio</option>
+        <option value="precio-desc">Mayor precio</option>
+        <option value="nombre">Nombre (A-Z)</option>
+      </select>
+      <label class="filtros__check">
+        <input type="checkbox" id="solo-destacados"> Solo destacados
+      </label>
+    </section>
+
+    <p id="contador" class="contador"></p>
+    <section id="catalogo" class="catalogo" aria-live="polite"></section>
+  </main>
+
+  <dialog id="detalle" class="detalle">
+    <h2 id="detalle-nombre"></h2>
+    <p id="detalle-categoria" class="detalle__categoria"></p>
+    <p id="detalle-descripcion"></p>
+    <p id="detalle-precio" class="detalle__precio"></p>
+    <p id="detalle-stock"></p>
+    <a id="detalle-artesano" class="btn btn-secundario"></a>
+    <form method="dialog"><button class="btn btn--primario">Cerrar</button></form>
+  </dialog>
+
+  <div id="aviso" class="aviso" role="status"></div>
+
+  <script type="module" src="js/pages/catalogo.js"></script>
+</body>
+</html>
