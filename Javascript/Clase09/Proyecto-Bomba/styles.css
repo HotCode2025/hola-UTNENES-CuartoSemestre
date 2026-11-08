@@ -1,0 +1,4 @@
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #151923; color: white; font-family: system-ui, sans-serif; }
+main { max-width: 28rem; padding: 2rem; text-align: center; background: #252d3c; border-radius: 1rem; }
+#tiempo { margin: 1rem; font: bold 4rem monospace; }
+button { padding: .6rem 1rem; margin: .2rem; }

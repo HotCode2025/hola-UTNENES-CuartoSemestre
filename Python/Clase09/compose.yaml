@@ -1,0 +1,11 @@
+services:
+  analisis:
+    build: ./app
+    volumes:
+      - ./app:/curso
+  servidor:
+    build: ./web-server
+    volumes:
+      - ./web-server:/curso
+    ports:
+      - "127.0.0.1:8000:8000"
