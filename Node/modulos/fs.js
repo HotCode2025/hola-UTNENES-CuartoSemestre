@@ -21,3 +21,5 @@ function borrar(ruta, cb) {
 }
 
 borrar(`${__dirname}/archivo1.txt`, console.log);
+//escribir(`${__dirname}/archivo1.txt`,"Reescribimos el archivo", console.log);
+//leer(`${__dirname}/archivo1.txt`, console.log);//Sintaxis ES6
