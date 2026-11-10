@@ -1,0 +1,118 @@
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    color: white;
+    padding: 15px 40px;
+}
+
+.header-logo {
+    font-size: 24px;
+}
+
+.ver-carrito {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.cart-counter {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 14px;
+}
+
+/* Products styles */
+.card-products-container {
+    margin: 5vh auto;
+}
+
+.card-products {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card-products img {
+    margin-top: 40px;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+.card-products button {
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.card-products button:hover {
+    background-color: #555;
+}
+
+/* Modal Container */
+.modal-container {
+    width: 80%;
+    margin: 0 10%;
+    max-height: 88vh;
+    color: #fff;
+    background-color: #121212;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    overflow: auto;
+    z-index: 9;
+    top: 12vh;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-around;
+    background-color: #222;
+    width: 100%;
+    padding: 10px;
+}
+
+.modal-header-title {
+    justify-self: start;
+}
+
+.modal-header-button {
+    cursor: pointer;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.modal-content img {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
+}
+
+.total-content {
+    font-size: 25px;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}

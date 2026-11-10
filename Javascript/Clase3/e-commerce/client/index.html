@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <!-- Toastify CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <title>e-Commerce</title>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1 class="header-logo">Shop</h1>
+    <h2 class="ver-carrito" id="verCarrito">
+      🛒 <span class="cantidad-carrito" id="cantidadCarrito">0</span>
+    </h2>
+  </header>
+
+  <!-- Contenedor principal de productos -->
+  <div class="card-products" id="shopContent"></div>
+
+  <!-- Contenedor del Modal -->
+  <div class="modal-container" id="modal-container"></div>
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Toastify JS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
