@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0d1117;
+    color: #ffffff;
+    font-family: 'Press Start 2P', cursive, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 15px 0;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #00d2ff, -2px -2px 0px #ff0055;
+}
+
+h2 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #e6e6e6;
+}
+
+p {
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+}
+
+/* --- Botón Reglas y Reglas Div --- */
+#boton-reglas {
+    background: #ff7700;
+    color: #fff;
+    border: 2px solid #ffaa00;
+    padding: 8px 16px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(255, 119, 0, 0.5);
+    transition: transform 0.1s;
+}
+
+#boton-reglas:hover {
+    transform: scale(1.05);
+}
+
+.reglas-juego {
+    background-color: #161b22;
+    border: 2px solid #00d2ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px auto;
+    max-width: 550px;
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
+}
+
+.reglas-juego p {
+    margin-bottom: 8px;
+    color: #43d9ad;
+}
+
+/* --- Secciones Generales (Cajas Neón) --- */
+section {
+    background: #161b22;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 12px auto;
+    width: 100%;
+    max-width: 620px;
+    text-align: center;
+}
+
+#Escojer-personaje, #Seleccionar-ataque, #ver-mapa {
+    border: 2px solid #00d2ff;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+}
+
+#mensajes {
+    border: 2px solid #39ff14;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+    padding: 15px;
+}
+
+#Reiniciar {
+    border: 2px solid #ff0055;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+}
+
+/* --- Grilla de Personajes (Tarjetas) --- */
+.personajes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.personaje-card {
+    background: #0d1117;
+    border: 2px solid #ffaa00;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.personaje-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 12px rgba(255, 170, 0, 0.6);
+}
+
+.personaje-img {
+    background: transparent;
+    border-bottom: 1px solid #30363d;
+}
+
+label {
+    font-size: 11px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    accent-color: #00d2ff;
+    cursor: pointer;
+}
+
+/* --- Canvas y Mapa --- */
+#ver-mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mapa {
+    background-color: #000;
+    border: 2px solid #00d2ff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    max-width: 100%;
+    height: auto;
+}
+
+/* --- Panel de Mensajes y Vidas --- */
+#resultado-combate {
+    background: #0d1117;
+    border: 1px solid #39ff14;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #39ff14;
+    line-height: 1.4;
+}
+
+.vidas-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.vidas-container p {
+    font-size: 16px;
+}
+
+/* --- Botones de Acción --- */
+.botones-ataque {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+#boton-personaje {
+    background: #00d2ff;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    font-size: 12px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+}
+
+#boton-personaje:hover {
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+#boton-punio, #boton-patada, #boton-barrida {
+    background: #238636;
+    color: #fff;
+    border: 1px solid #2ea043;
+    padding: 10px 14px;
+    font-size: 10px;
+    border-radius: 6px;
+}
+
+#boton-punio:hover, #boton-patada:hover, #boton-barrida:hover {
+    background: #2ea043;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+}
+
+#boton-reiniciar {
+    background: #ff0055;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 11px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
+}
+
+#boton-reiniciar:hover {
+    background: #ff3377;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.9);
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not

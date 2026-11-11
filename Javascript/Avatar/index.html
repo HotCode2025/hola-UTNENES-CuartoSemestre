@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LA LEYENDA DE AANG: AVATAR</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <!-- Botón Mute/Unmute de música -->
+    <div style="position: absolute; top: 10px; right: 10px; z-index: 100;">
+      <button id="boton-musica" style="padding: 8px 14px; cursor: pointer; background: #161b22; color: #00d2ff; border: 1px solid #00d2ff; border-radius: 6px; font-weight: bold; font-family: 'Press Start 2P', cursive; font-size: 10px;">🔊 Música ON</button>
+    </div>
+
+    <button id="boton-reglas" style="margin-top: 15px;">Mostrar Reglas</button>
+    <div class="reglas-juego" id="reglas-contenedor" style="display: none">
+      <p>1- Selecciona a tu personaje, así la PC elige tu contrincante de manera aleatoria.</p>
+      <p>2- Ambos tienen 3 vidas.</p>
+      <p>3- Moverte en el mapa con las flechas del teclado hasta encontrar a tu rival.</p>
+      <p>4- Elegir ataques: Patada le gana a puño | Puño le gana a barrida | Barrida le gana a patada</p>
+    </div>
+
+    <h1>AVATAR 🔥 💦 🌱 🌪️</h1>
+
+    <!-- Sección 1: Selección de Personaje -->
+    <section id="Escojer-personaje">
+      <h2>Elije tu personaje 👥</h2>
+      <div class="personajes-container" id="contenedorTarjetas"></div>
+      <button id="boton-personaje">▶ Seleccionar ◀</button>
+    </section>
+
+    <!-- Sección 2: Mapa Canvas -->
+    <section id="ver-mapa" style="display: none">
+      <h2>Recorre el mapa con tu personaje 🗺️</h2>
+      <canvas id="mapa"></canvas>
+      <p style="font-size: 14px; color: #a0a0a0;">Móvete con las flechas del teclado ⬆️ ⬇️ ⬅️ ➡️</p>
+    </section>
+
+    <!-- Sección 3: Mensajes del Estado y Batalla -->
+    <section id="mensajes" style="display: none">
+      <p>🧑 Tu Elección: <span id="heroe-eleccion">-</span></p>
+      <p>👹 Tu enemigo: <span id="enemigo-eleccion">-</span></p>
+      <div id="resultado-combate">
+        Selecciona un personaje y comienza el combate...
+      </div>
+    </section>
+
+    <!-- Sección 4: Selección de Ataques -->
+    <section id="Seleccionar-ataque" style="display: none">
+      <h2>⚔️ Elige tu ataque</h2>
+      <div class="vidas-container">
+        <p>🧑 Tu personaje tiene <span id="vida-jugador">3</span> ❤️</p>
+        <p>👹 El enemigo tiene <span id="vida-enemigo">3</span> ❤️</p>
+      </div>
+      <div class="botones-ataque">
+        <button id="boton-punio">👊 Puño</button>
+        <button id="boton-patada">🦵 Patada</button>
+        <button id="boton-barrida">🌀 Barrida</button>
+      </div>
+    </section>
+
+    <!-- Sección 5: Reiniciar -->
+    <section id="Reiniciar" style="display: none">
+      <button id="boton-reiniciar">🔄 Reiniciar Juego 🔄</button>
+    </section>
+
+    <!-- Firma del Equipo en el Pie de Página -->
+    <footer style="margin-top: 20px; font-size: 10px; color: #8b949e; font-family: 'Press Start 2P', cursive;">
+      Desarrollado por <span style="color: #00d2ff;">holaUTNenes</span> - UTN 2026
+    </footer>
+
+    <!-- Elementos de Audio -->
+    <audio id="musica-fondo" src="./audio/musica.mp3" loop></audio>
+    <audio id="sonido-ataque" src="./audio/ataque.wav" preload="auto"></audio>
+
+    <script src="./js/personajes.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
